@@ -3,6 +3,9 @@ package com.digiportal.digiportal_bk.Model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -33,9 +36,6 @@ public class UsersEntity {
     @Column(nullable=false, unique=true)
     private String email;
 
-    @Column(nullable=false,unique=true)
-    private String Password; 
-
     @Column(nullable=false, unique=false)
     private String name;
 
@@ -50,11 +50,11 @@ public class UsersEntity {
     private LocalDate DOB;
 
 
-   
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @UpdateTimestamp
     private LocalDateTime UpdatedAt;    
 
 
