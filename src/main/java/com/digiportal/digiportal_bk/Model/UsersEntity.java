@@ -55,7 +55,7 @@ public class UsersEntity {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime UpdatedAt;    
+    private LocalDateTime UpdatedAt;
 
-
+   
 }

@@ -2,13 +2,14 @@ package com.digiportal.digiportal_bk.Model;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Pattern;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,11 +36,12 @@ public class PasswordEntity {
     )
     private String pwdhash;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+       @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime UpdatedAt;    
+    @UpdateTimestamp
+    private LocalDateTime UpdatedAt;
     
 
 
