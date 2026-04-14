@@ -45,11 +45,12 @@ public AuthenticationManager authenticationManager(
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                /* .requestMatchers("/auth/login").permitAll() // login open
+                 .requestMatchers("/auth/login").permitAll() // login open
                 .requestMatchers("/users").permitAll()      // register open
-                .requestMatchers("/pwd").permitAll()        // password open
-                .anyRequest().authenticated()  */
-                .anyRequest().permitAll()            // everything else needs token
+                .requestMatchers("/pwd").permitAll() 
+                //.requestMatchers(HttpMethod.GET, "/**").permitAll()  // allow all GET requests without authentication
+                .anyRequest().authenticated()  
+                           // everything else needs token
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
