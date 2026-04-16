@@ -8,6 +8,12 @@ import com.digiportal.digiportal_bk.Model.UsersEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UsersEntity,String>{
 
+ 
+
+    public UsersEntity findByUsername(String username);
+
+
+
 
 
 }

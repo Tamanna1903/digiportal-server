@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digiportal.digiportal_bk.Model.UsersEntity;
+import com.digiportal.digiportal_bk.Repository.UserRepository;
 import com.digiportal.digiportal_bk.Security.JwtUtil;
 
 @CrossOrigin(origins = "*")
@@ -24,6 +26,8 @@ private AuthenticationManager authenticationManager;
 
 @Autowired
 private JwtUtil jwtUtil;
+@Autowired
+private UserRepository userRepository;
 
 @PostMapping("/login")
 public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> request) {
@@ -31,8 +35,13 @@ public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String
     String password =request.get("password");
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
+    UsersEntity user = userRepository.findByUsername(username);
+
     String token=jwtUtil.generateToken(username);
-    return ResponseEntity.ok(Map.of("token",token));
+    return ResponseEntity.ok(Map.of("token",token, 
+    "username", username,
+    "name", user.getName(),
+    "email", user.getEmail()));
 }
 
 }
