@@ -50,7 +50,10 @@ public AuthenticationManager authenticationManager(
                  .requestMatchers("/auth/login").permitAll() // login open
                 .requestMatchers("/users").permitAll()      // register open
                 .requestMatchers("/pwd").permitAll() 
-                .requestMatchers("/getusers").permitAll()  // allow all GET requests without authentication
+                .requestMatchers("/getusers").permitAll()
+                .requestMatchers("/api/documents/upload").permitAll()
+                .requestMatchers("/api/documents/download/**").permitAll()
+                  // allow all GET requests without authentication
                 .anyRequest().authenticated()  
                            // everything else needs token
             )
